@@ -1,0 +1,7 @@
+// artist.interface.ts
+
+export interface Artist {
+  id: string;
+  name: string;
+  grammy: boolean;
+}
