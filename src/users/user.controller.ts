@@ -12,6 +12,7 @@ import {
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dtos';
 
 @ApiTags('User')
 @Controller('user')
@@ -29,12 +30,9 @@ export class UserController {
   }
 
   @Post()
-  async create(
-    @Body() createUserDto: { login: string; password: string },
-  ): Promise<User> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user: Partial<User> = {
-      login: createUserDto.login,
-      password: createUserDto.password,
+      ...createUserDto,
     };
     return this.userService.create(user as User);
   }
